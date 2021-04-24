@@ -7,7 +7,7 @@ if [[ -z "$GITHUB_WORKSPACE" ]]; then
   exit 1
 fi
 
-cd "${GITHUB_WORKSPACE}/src"
+cd "${GITHUB_WORKSPACE}/"
 
 hugo version
 hugo $1
