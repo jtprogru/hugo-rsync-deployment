@@ -8,8 +8,12 @@ if [[ -z "$GITHUB_WORKSPACE" ]]; then
 fi
 
 cd "${GITHUB_WORKSPACE}/"
+
 ls -lah themes/
+
 hugo version
+hugo mod graph
+
 hugo $1
 
 mkdir "${HOME}/.ssh"
