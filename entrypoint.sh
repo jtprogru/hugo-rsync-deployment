@@ -9,6 +9,11 @@ fi
 
 cd "${GITHUB_WORKSPACE}/"
 
+COMMIT=$(git rev-parse --short HEAD)
+
+sed -i -e "s/@@@COMMIT@@@/${COMMIT}/g" config.yml
+
+
 hugo version
 hugo $1
 
