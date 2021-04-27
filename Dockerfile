@@ -16,6 +16,7 @@ ENV HUGO_VERSION '0.82.1'
 
 RUN apk -U upgrade && apk add --no-cache --upgrade --no-progress \
         curl \
+        git \
         openssh \
         rsync && \
         curl -sSL https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -o /tmp/hugo.tar.gz && \
