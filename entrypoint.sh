@@ -16,6 +16,8 @@ mkdir "${HOME}/.ssh"
 echo "${VPS_DEPLOY_KEY}" > "${HOME}/.ssh/id_rsa_deploy"
 chmod 600 "${HOME}/.ssh/id_rsa_deploy"
 
+ssh-keyscan -p 22 ${VPS_DEPLOY_HOST} > ~/.ssh/known_hosts
+
 rsync --version
 sh -c "
 rsync -avz \
