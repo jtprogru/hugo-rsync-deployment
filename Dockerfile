@@ -2,7 +2,8 @@ FROM alpine:3.12.0
 
 LABEL "name"="Hugo rsync deployment"
 LABEL "maintainer"="Ron van der Heijden <r.heijden@live.nl>"
-LABEL "version"="0.1.6"
+LABEL "maintainer"="Michael Savin <jtprogru@gmail.com>"
+LABEL "version"="0.1.7"
 
 LABEL "com.github.actions.name"="Hugo rsync deployment"
 LABEL "com.github.actions.description"="An action that generates and deploys a static website using Hugo and rsync."
@@ -12,7 +13,7 @@ LABEL "com.github.actions.color"="blue"
 LABEL "repository"="https://github.com/ronvanderheijden/hugo-rsync-deployment"
 LABEL "homepage"="https://ronvanderheijden.nl/"
 
-ENV HUGO_VERSION '0.95.0'
+ENV HUGO_VERSION '0.101.0'
 
 RUN apk -U upgrade && apk add --no-cache --upgrade --no-progress \
         curl \
