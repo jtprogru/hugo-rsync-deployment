@@ -9,6 +9,8 @@ fi
 
 cd "${GITHUB_WORKSPACE}/"
 
+git config --global --add safe.directory '*'
+
 COMMIT=$(git rev-parse --short HEAD)
 
 sed -i -e "s/@@@COMMIT@@@/${COMMIT}/g" config.yml
