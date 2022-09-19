@@ -15,7 +15,7 @@ sed -i -e "s/@@@COMMIT@@@/${COMMIT}/g" config.yml
 
 
 hugo version
-hugo --minify
+hugo $1
 
 mkdir "${HOME}/.ssh"
 echo "${VPS_DEPLOY_KEY}" > "${HOME}/.ssh/id_rsa_deploy"
