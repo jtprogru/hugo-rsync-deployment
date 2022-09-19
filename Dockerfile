@@ -1,4 +1,4 @@
-FROM alpine:3.12.0
+FROM alpine:latest
 
 LABEL "name"="Hugo rsync deployment"
 LABEL "maintainer"="Ron van der Heijden <r.heijden@live.nl>"
@@ -13,7 +13,7 @@ LABEL "com.github.actions.color"="blue"
 LABEL "repository"="https://github.com/ronvanderheijden/hugo-rsync-deployment"
 LABEL "homepage"="https://ronvanderheijden.nl/"
 
-ENV HUGO_VERSION '0.102.3'
+ENV HUGO_VERSION '0.103.1'
 
 RUN apk -U upgrade && apk add --no-cache --upgrade --no-progress \
         curl \

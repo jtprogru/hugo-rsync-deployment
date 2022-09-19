@@ -1,9 +1,11 @@
 # Hugo rsync deployment
+
 Why would you use a CMS if you have [GitHub Actions](https://github.com/features/actions), [Hugo](https://gohugo.io) and [rsync](https://linux.die.net/man/1/rsync)?
 
 This action checks out your repository, generates a static website using Hugo and deploys the public files using rsync.
 
 ## Requirements
+
 Before we can deploy from github, we need to setup some things.  
 Assuming we want the user to be named `github` and the host `static-website.com`:
 
@@ -12,9 +14,11 @@ Assuming we want the user to be named `github` and the host `static-website.com`
 1. We need to place the private key in a secret named `VPS_DEPLOY_KEY` (Repository -> Settings -> Secrets).
 
 ## Example
+
 The fastest way to start a project, is to simply clone [the boilerplate](https://github.com/ronvanderheijden/hugo-rsync-deployment-boilerplate).
 
 But we can also place our Hugo website in the `src/` directory and create a file in `.github/workflows/deploy.yml` with the content:
+
 ```yaml
 name: 'Generate and deploy'
 
@@ -46,7 +50,9 @@ jobs:
 ```
 
 ## Hugo
+
 Some Hugo commands that can help:
+
 ```sh
 hugo version         # to compare the local version with the action
 hugo server -s src   # to run the website locally
@@ -55,7 +61,9 @@ hugo -s src --minify # to minify CSS, JS, JSON, HTML, SVG and XML resources
 ```
 
 ## rsync
+
 Some tips to test rsync:
+
 ```sh
 --archive, -a     # archive mode (recursive, links, permissions, modification times, group, owner, special files)
 --compress, -z    # compress file data during the transfer
@@ -66,8 +74,10 @@ Some tips to test rsync:
 --quiet, -q       # suppress non-error messages
 ```
 
-# Support
+## Support
+
 Found a bug? Got a feature request?  [Create an issue](https://github.com/ronvanderheijden/hugo-rsync-deployment/issues).
 
-# License
+## License
+
 Hugo rsync deployment is open source and licensed under [the MIT licence](https://github.com/ronvanderheijden/hugo-rsync-deployment/blob/master/LICENSE.txt).

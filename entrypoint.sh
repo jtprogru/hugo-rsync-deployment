@@ -15,7 +15,7 @@ sed -i -e "s/@@@COMMIT@@@/${COMMIT}/g" config.yml
 
 
 hugo version
-hugo $1
+hugo --minify
 
 mkdir "${HOME}/.ssh"
 echo "${VPS_DEPLOY_KEY}" > "${HOME}/.ssh/id_rsa_deploy"
@@ -25,10 +25,10 @@ ssh-keyscan -p 22 ${VPS_DEPLOY_HOST} > ~/.ssh/known_hosts
 
 rsync --version
 sh -c "
-rsync -avz \
+rsync -avhz --progress \
   -e 'ssh -i ${HOME}/.ssh/id_rsa_deploy -o StrictHostKeyChecking=no' \
   ${GITHUB_WORKSPACE}/public/ \
-  ${VPS_DEPLOY_USER}@${VPS_DEPLOY_HOST}:${VPS_DEPLOY_DEST}/
+  ${VPS_DEPLOY_USER}@${VPS_DEPLOY_HOST}:${VPS_DEPLOY_DEST}/ --delete
 "
 
 exit 0
