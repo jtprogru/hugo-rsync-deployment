@@ -25,6 +25,11 @@ chmod 600 "${HOME}/.ssh/id_rsa_deploy"
 
 ssh-keyscan -p 22 ${VPS_DEPLOY_HOST} > ~/.ssh/known_hosts
 
+echo "Rewrite robots.txt"
+
+cp ${GITHUB_WORKSPACE}/content/robots.txt ${GITHUB_WORKSPACE}/public/robots.txt
+
+
 rsync --version
 sh -c "
 rsync -avhz --progress \
