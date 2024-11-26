@@ -13,15 +13,15 @@ LABEL "com.github.actions.color"="blue"
 LABEL "repository"="https://github.com/ronvanderheijden/hugo-rsync-deployment"
 LABEL "homepage"="https://ronvanderheijden.nl/"
 
-ENV HUGO_VERSION '0.135.0'
+ENV HUGO_VERSION '0.138.0'
 
 RUN apk -U upgrade && apk add --no-cache --upgrade --no-progress \
-        curl \
-        git \
-        openssh \
-        rsync && \
-        curl -sSL https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -o /tmp/hugo.tar.gz && \
-        tar xf /tmp/hugo.tar.gz hugo -C /tmp/ && cp /tmp/hugo /usr/bin
+    curl \
+    git \
+    openssh \
+    rsync && \
+    curl -sSL https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -o /tmp/hugo.tar.gz && \
+    tar xf /tmp/hugo.tar.gz hugo -C /tmp/ && cp /tmp/hugo /usr/bin
 
 ADD entrypoint.sh /
 RUN chmod +x /entrypoint.sh
