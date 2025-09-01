@@ -13,7 +13,7 @@ LABEL "com.github.actions.color"="blue"
 LABEL "repository"="https://github.com/ronvanderheijden/hugo-rsync-deployment"
 LABEL "homepage"="https://ronvanderheijden.nl/"
 
-ENV HUGO_VERSION '0.138.0'
+ENV HUGO_VERSION '0.148.2'
 
 RUN apk -U upgrade && apk add --no-cache --upgrade --no-progress \
     curl \
