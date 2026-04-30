@@ -6,14 +6,26 @@ branding:
   color: 'blue'
 
 inputs:
+  hugo-version:
+    description: 'Hugo version to install and use'
+    required: false
+    default: '0.160.1'
   hugo-arguments:
     description: 'Hugo arguments'
     required: false
     default: '--minify'
+  hugo-config:
+    description: 'Hugo config file name to inject current git commit hash (placeholder: @@@COMMIT@@@). Leave empty to skip.'
+    required: false
+    default: ''
   rsync-arguments:
     description: 'Rsync arguments'
     required: false
-    default: '--archive --compress --xattrs --delete'
+    default: '--archive --compress --delete'
+  robots-txt-source:
+    description: 'Path to robots.txt (relative to repo root) to copy into public/ after Hugo build. Leave empty to skip.'
+    required: false
+    default: ''
 
 runs:
   using: 'docker'
@@ -21,3 +33,6 @@ runs:
   args:
     - ${{ inputs.hugo-arguments }}
     - ${{ inputs.rsync-arguments }}
+    - ${{ inputs.hugo-version }}
+    - ${{ inputs.hugo-config }}
+    - ${{ inputs.robots-txt-source }}

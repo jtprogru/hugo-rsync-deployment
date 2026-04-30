@@ -1,27 +1,22 @@
-FROM alpine:latest
+FROM alpine:3.21
 
 LABEL "name"="Hugo rsync deployment"
-LABEL "maintainer"="Ron van der Heijden <r.heijden@live.nl>"
 LABEL "maintainer"="Mikhail Savin <jtprogru@gmail.com>"
-LABEL "version"="0.2.1"
+LABEL "version"="0.3.0"
 
 LABEL "com.github.actions.name"="Hugo rsync deployment"
 LABEL "com.github.actions.description"="An action that generates and deploys a static website using Hugo and rsync."
 LABEL "com.github.actions.icon"="upload-cloud"
 LABEL "com.github.actions.color"="blue"
 
-LABEL "repository"="https://github.com/ronvanderheijden/hugo-rsync-deployment"
-LABEL "homepage"="https://ronvanderheijden.nl/"
-
-ENV HUGO_VERSION '0.160.1'
+LABEL "repository"="https://github.com/jtprogru/hugo-rsync-deployment"
+LABEL "homepage"="https://jtprog.ru/"
 
 RUN apk -U upgrade && apk add --no-cache --upgrade --no-progress \
     curl \
     git \
     openssh \
-    rsync && \
-    curl -sSL https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -o /tmp/hugo.tar.gz && \
-    tar xf /tmp/hugo.tar.gz hugo -C /tmp/ && cp /tmp/hugo /usr/bin
+    rsync
 
 ADD entrypoint.sh /
 RUN chmod +x /entrypoint.sh
