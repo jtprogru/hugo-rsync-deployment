@@ -1,8 +1,8 @@
-FROM alpine:3.21
+FROM alpine:3.21@sha256:48b0309ca019d89d40f670aa1bc06e426dc0931948452e8491e3d65087abc07d
 
 LABEL "name"="Hugo rsync deployment"
 LABEL "maintainer"="Mikhail Savin <jtprogru@gmail.com>"
-LABEL "version"="0.3.0"
+LABEL "version"="0.4.0"
 
 LABEL "com.github.actions.name"="Hugo rsync deployment"
 LABEL "com.github.actions.description"="An action that generates and deploys a static website using Hugo and rsync."

@@ -26,6 +26,14 @@ inputs:
     description: 'Path to robots.txt (relative to repo root) to copy into public/ after Hugo build. Leave empty to skip.'
     required: false
     default: ''
+  hugo-extended:
+    description: 'Install the Hugo Extended build (required for SCSS/SASS). Set to "true" to enable.'
+    required: false
+    default: 'false'
+  ssh-port:
+    description: 'SSH port used for ssh-keyscan and rsync.'
+    required: false
+    default: '22'
 
 runs:
   using: 'docker'
@@ -36,3 +44,5 @@ runs:
     - ${{ inputs.hugo-version }}
     - ${{ inputs.hugo-config }}
     - ${{ inputs.robots-txt-source }}
+    - ${{ inputs.hugo-extended }}
+    - ${{ inputs.ssh-port }}

@@ -20,11 +20,17 @@ Assuming the deploy user is `github` and the host is `static-website.com`:
 
 | Input | Required | Default | Description |
 |-------|----------|---------|-------------|
-| `hugo-version` | no | `0.160.1` | Hugo version to install at runtime |
+| `hugo-version` | no | `0.160.1` | Hugo version to install at runtime. Must be `0.103.0` or newer (see note below). |
 | `hugo-arguments` | no | `--minify` | Extra arguments passed to `hugo` build command |
 | `hugo-config` | no | `` (empty) | Config file name in which `@@@COMMIT@@@` is replaced with the current git short SHA. Leave empty to skip. |
 | `rsync-arguments` | no | `--archive --compress --delete` | Arguments passed to `rsync` |
 | `robots-txt-source` | no | `` (empty) | Path to `robots.txt` relative to repo root to copy into `public/` after Hugo build. Leave empty to skip. |
+| `hugo-extended` | no | `false` | Install the Hugo Extended build (required for SCSS/SASS). Set to `true` to enable. |
+| `ssh-port` | no | `22` | SSH port used for `ssh-keyscan` and `rsync`. |
+
+The downloaded Hugo archive is verified against its published SHA-256 checksum, and the correct binary is selected for the runner architecture (`amd64` / `arm64`), so the action works on both `ubuntu-latest` and ARM runners.
+
+> **Note on `hugo-version`:** the action uses Hugo's modern release asset names (`hugo_<version>_linux-amd64.tar.gz`), introduced in Hugo `0.103.0`. Older versions are not supported.
 
 ## Example
 
@@ -74,6 +80,24 @@ If your Hugo config contains the placeholder `@@@COMMIT@@@`, the action can repl
         with:
           hugo-version: '0.160.1'
           hugo-config: 'hugo.yaml'
+```
+
+### Hugo Extended (SCSS/SASS)
+
+Themes that compile SCSS/SASS require the Hugo Extended build:
+
+```yaml
+        with:
+          hugo-extended: 'true'
+```
+
+### Custom SSH port
+
+If the remote server listens on a non-standard SSH port:
+
+```yaml
+        with:
+          ssh-port: '2222'
 ```
 
 ## Hugo
