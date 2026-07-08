@@ -77,12 +77,18 @@ chmod 700 "${HOME}/.ssh"
 printf '%s\n' "${VPS_DEPLOY_KEY}" > "${HOME}/.ssh/id_rsa_deploy"
 chmod 600 "${HOME}/.ssh/id_rsa_deploy"
 
-ssh-keyscan -p "${SSH_PORT}" "${VPS_DEPLOY_HOST}" > "${HOME}/.ssh/known_hosts"
+# Pre-seed known_hosts via ssh-keyscan. Some hosts (fail2ban / throttling on
+# shared hosting) silently drop the bare keyscan probe, leaving the file empty;
+# accept-new below is the fallback so an empty scan doesn't break the deploy.
+ssh-keyscan -T 10 -p "${SSH_PORT}" "${VPS_DEPLOY_HOST}" > "${HOME}/.ssh/known_hosts" 2>/dev/null || true
+if [ ! -s "${HOME}/.ssh/known_hosts" ]; then
+    echo "WARN: ssh-keyscan returned no host key for ${VPS_DEPLOY_HOST}:${SSH_PORT}; relying on StrictHostKeyChecking=accept-new"
+fi
 
 rsync --version
 # shellcheck disable=SC2086 # intentional word splitting of rsync flags
 rsync ${RSYNC_ARGS} \
-    -e "ssh -i ${HOME}/.ssh/id_rsa_deploy -p ${SSH_PORT}" \
+    -e "ssh -i ${HOME}/.ssh/id_rsa_deploy -p ${SSH_PORT} -o StrictHostKeyChecking=accept-new" \
     "${GITHUB_WORKSPACE}/public/" \
     "${VPS_DEPLOY_USER}@${VPS_DEPLOY_HOST}:${VPS_DEPLOY_DEST}/"
 
